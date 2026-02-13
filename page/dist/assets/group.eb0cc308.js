@@ -1,0 +1,1 @@
+import{a as o}from"./axios.a0958352.js";const s=()=>o.get("/api/group/"),a=p=>o.post("/api/group/",p),e=(p,t)=>o.put(`/api/group/${p}`,t),u=p=>o.delete(`/api/group/${p}`);export{e as a,u as d,s as g,a as p};

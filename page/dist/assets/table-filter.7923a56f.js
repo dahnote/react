@@ -1,0 +1,1 @@
+function o(i,l,s){const u=s.toLowerCase();return l.filter(t=>{let f=!1;return i.some(e=>{try{if(e.filter!==!1){t[e.field]===void 0&&(t[e.field]="");let r=JSON.stringify(t[e.field]);return r=r.toLowerCase(),r.includes(u)?(f=!0,!0):!1}else return!1}catch{return!0}}),f})}export{o as f};

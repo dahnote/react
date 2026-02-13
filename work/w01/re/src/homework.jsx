@@ -124,22 +124,19 @@ function App() {
                 <p className="card-text">商品內容：{tempProduct.description}</p>
                 <div className="d-flex">
                   <p className="card-text text-secondary">
-                    <del>{tempProduct.origin_price}</del> 元 /{' '}
+                    <del>{tempProduct.origin_price}</del> 元 /
                     {tempProduct.price} 元
                   </p>
                 </div>
                 <h5 className="mt-3">更多圖片：</h5>
                 <div className="d-flex flex-wrap">
-                  {products.map((item, index) => {
-                    return (
-                      <img
-                        src={tempProduct.imagesUrl}
-                        key={index}
-                        className="card-img-top primary-image"
-                        alt="主圖"
-                      />
-                    );
-                  })}
+                  {
+                    <img
+                      src={tempProduct.imagesUrl}
+                      className="card-img-top primary-image"
+                      alt="主圖"
+                    />
+                  }
                 </div>
               </div>
             </div>

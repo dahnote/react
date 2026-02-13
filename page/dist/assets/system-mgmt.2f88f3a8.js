@@ -1,0 +1,1 @@
+import{a as t}from"./axios.a0958352.js";const a=s=>t.get(`/api/aws/history/ec2/status_notice${s}`),o=s=>t.get(`/api/subscripts/statistics${s}`),c=s=>t.put("/api/subscripts/",s),e=s=>t.get(`/api/session/history_login${s}`);export{o as a,e as b,a as g,c as p};
