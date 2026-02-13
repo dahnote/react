@@ -3,6 +3,6 @@ import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/react/work/w01/re/dist/assets/', // githubpage
+  base: '/react/work/w01/re/dist/', // githubpage
   plugins: [react()],
 });
