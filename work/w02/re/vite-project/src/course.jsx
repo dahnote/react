@@ -2,11 +2,11 @@ import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-
-const API_BASE = "https://ec-course-api.hexschool.io/v2"
-
-// 請自行替換 API_PATH
-const API_PATH = ""
+import axios from 'axios'
+const API_BASE = import.meta.env.VITE_API_BASE
+// console.log(import.meta.env.VITE_API_BASE)
+// console.log(env.API_BASE)
+// const API_PATH = ""
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,8 +27,14 @@ function App() {
       [name]:value
     })
   }
-  function login(){
-
+  async function login(){
+    
+    try {
+      const res = await axios.post(`${API_BASE}/admin/signin`,data)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <>
