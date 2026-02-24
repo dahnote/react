@@ -1,27 +1,52 @@
 import { useState } from 'react';
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
+import axios from 'axios';
 import './App.css';
 
-const API_BASE = 'https://ec-course-api.hexschool.io/v2';
+const API_BASE = import.meta.env.VITE_API_BASE;
+const API_PATH = import.meta.env.VITE_API_PATH;
 
 // 請自行替換 API_PATH
-const API_PATH = '';
-
+const setAuthData = (token, expired) => {
+    axios.defaults.headers.common.Authorization = `${token}`;
+    document.cookie = `hexToken=${token};expires=${new Date(expired)}`;
+};
 function App() {
     const [formData, setFormData] = useState({
-        username: '',
+        username: 'jhenghuahuang@gmail.com',
         password: '',
     });
 
     const [isAuth, setIsAuth] = useState(false);
     const [products, setProducts] = useState([]);
     const [tempProduct, setTempProduct] = useState(null);
-    const handleSubmit = () => {
-        console.log(formData);
+
+    const HandleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(`${API_BASE}/admin/signin`, formData);
+            console.log(res);
+            const { token, expired } = res.data;
+            setAuthData(token, expired);
+            await getData();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const getData = async () => {
+        try {
+            const response = await axios.get(
+                `${API_BASE}/api/${API_PATH}/admin/products`
+            );
+            console.log('產品資料：', response.data);
+            setProducts(response.data.products);
+        } catch (err) {
+            console.error('取得產品失敗：', err.response?.data?.message);
+        }
     };
     function handleInputChange(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -139,7 +164,7 @@ function App() {
                             <form
                                 id="form"
                                 className="form-signin"
-                                onSubmit={handleSubmit}
+                                onSubmit={(e) => HandleSubmit(e)}
                             >
                                 <div className="form-floating mb-3">
                                     <input
