@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import axios from 'axios';
@@ -30,6 +30,7 @@ function App() {
             const { token, expired } = res.data;
             setAuthData(token, expired);
             await getData();
+            setIsAuth(true);
         } catch (error) {
             console.log(error);
         }
@@ -53,6 +54,30 @@ function App() {
             [name]: value,
         });
     }
+    const checkLogin = async () => {
+        try {
+            // 從 Cookie 取得 Token
+            const token = document.cookie
+                .split('; ')
+                .find((row) => row.startsWith('hexToken='))
+                ?.split('=')[1];
+            // console.log(token);
+            if (token) {
+                axios.defaults.headers.common.Authorization = token;
+                // 驗證 Token 是否有效
+                const res = await axios.post(`${API_BASE}/api/user/check`);
+                console.log('Token 驗證結果：', res.data);
+                return true;
+            }
+        } catch (error) {
+            console.error('Token 驗證失敗：', error.response?.data);
+            return false;
+        }
+    };
+
+    useEffect(() => {
+        checkLogin();
+    }, []);
 
     return (
         <>
@@ -60,6 +85,13 @@ function App() {
                 <div className="container">
                     <div className="row mt-5">
                         <div className="col-md-6">
+                            <button
+                                className="btn btn-danger mb-5"
+                                type="button"
+                                onClick={() => checkLogin()}
+                            >
+                                確認是否登入
+                            </button>
                             <h2>產品列表</h2>
                             <table className="table">
                                 <thead>
