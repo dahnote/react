@@ -76,7 +76,14 @@ function App() {
     };
 
     useEffect(() => {
-        checkLogin();
+        const initAuth = async () => {
+            const check = checkLogin();
+            if (check === true) {
+                setIsAuth(true);
+                getData();
+            }
+        };
+        initAuth();
     }, []);
 
     return (
