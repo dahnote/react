@@ -14,7 +14,7 @@ const setAuthData = (token, expired) => {
 };
 function App() {
     const [formData, setFormData] = useState({
-        username: 'jhenghuahuang@gmail.com',
+        username: '',
         password: '',
     });
 
