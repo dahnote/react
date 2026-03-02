@@ -25,8 +25,6 @@ function App() {
       <button type="button" onClick={() => handleAdd()}>
         add
       </button>
-
-      {/* <div>{arrayValue}</div> */}
       <ul>
         {arrayValue.map((i) => {
           return <li key={i}>{i}</li>;
