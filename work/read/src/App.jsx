@@ -17,6 +17,9 @@ const InputBox = ({ inpuText, handleChange }) => {
   );
 };
 
+const api = 'https://api.unsplash.com/search/photos/';
+const accessKey = 'nvaxn5gToEy_rr8KeWjNIhO3w2-04h8cskD1CNoKO0A';
+
 function App() {
   // let [arrayValue, setarrayValue] = useState([1, 2, 3]);
 
