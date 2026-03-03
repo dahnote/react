@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 const InputBox = ({ inpuText, handleChange }) => {
-  console.log(inpuText);
   return (
     <>
       <input
@@ -21,34 +21,34 @@ const api = 'https://api.unsplash.com/search/photos/';
 const accessKey = 'nvaxn5gToEy_rr8KeWjNIhO3w2-04h8cskD1CNoKO0A';
 
 function App() {
-  // let [arrayValue, setarrayValue] = useState([1, 2, 3]);
-
-  // const handlePop = () => {
-  //   let value = arrayValue;
-  //   value.pop();
-  //   console.log(value);
-  //   setarrayValue([...value]);
-  // };
-
-  // const handleAdd = () => {
-  //   let value = arrayValue;
-  //   let num = value.length + 1;
-  //   value.push(num);
-  //   setarrayValue([...value]);
-  // };
-  let [inpuText, setinpuText] = useState('');
+  let [inpuText, setinpuText] = useState('animal');
   const handleChange = (e) => {
-    console.log(e.target.value);
     setinpuText(e.target.value);
   };
 
+  const handleSearch = () => {
+    console.log(inpuText);
+  };
+
+  useEffect(() => {
+    const getApi = async () => {
+      const res = await axios.get(
+        `${api}?client_id=${accessKey}&query=${inpuText}`
+      );
+      console.log(res);
+    };
+    getApi();
+  }, []);
+
   return (
     <>
+      {inpuText}
+      <InputBox text={inpuText} handleChange={handleChange} />
       {
-        /* <button type="button" onClick={() => handlePop()}>
-        pop
-      </button>
-      <button type="button" onClick={() => handleAdd()}>
+        <button type="button" onClick={() => handleSearch()}>
+          search
+        </button>
+        /*<button type="button" onClick={() => handleAdd()}>
         add
       </button>
       <ul>
@@ -56,7 +56,7 @@ function App() {
           return <li key={i}>{i}</li>;
         })}
       </ul> */
-        <InputBox text={inpuText} handleChange={handleChange} />
+        // <InputBox text={inpuText} handleChange={handleChange} />
       }
     </>
   );
