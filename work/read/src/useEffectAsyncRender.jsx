@@ -59,7 +59,6 @@ function App() {
         let res = await axios.get(
           `${api}?client_id=${accessKey}&query=${inpuText}`
         );
-        console.log(res.data.results);
         setJsonData(res.data.results);
         console.log(res);
       } catch (err) {
@@ -75,7 +74,6 @@ function App() {
     <>
       <div className="row row-cols-2 g-3">
         {jsonData.map((item) => {
-          console.log(item.id);
           return <Card item={item} />;
         })}
       </div>
